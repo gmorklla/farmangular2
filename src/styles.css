@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+
+html, body {
+	font-family: 'Roboto', sans-serif;
+}
+
+.miPaginacion .ng2-pagination .current {
+    background: #00bcd4;
+    border-radius: 10px;
+}
+
+.miPaginacion .ng2-pagination a, .ng2-pagination button {
+    cursor: pointer;    
+}
+
+.miPaginacion .ng2-pagination a:hover, .ng2-pagination button:hover {
+    background: #ffc107;
+    border-radius: 10px;
+    color: white;
+}
