@@ -1,22 +1,50 @@
-<div>
-    <p>
-        <md-select placeholder="Familia">
-            <md-option *ngFor="let familia of familias" [value]="familia.value" (onSelect)="setFamilia(familia.value)">
-                {{ familia.viewValue }}
-            </md-option>
-        </md-select>
-    </p>
+<style>
+#meds.flex-container {
+    max-width: 1196px;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: center;
+}
+
+#meds >.flex-item {
+    background: #f5f5f5;
+    width: 200px;
+    margin-bottom: 10px;
+    flex-grow: 0;
+    flex-shrink: 1;
+}
+</style>
+<md-progress-bar mode="indeterminate" *ngIf="status == true"></md-progress-bar>
+
+<div class="paginador">    
+    <md-select>
+        <md-option *ngFor="let familia of familias" [value]="familia.value" (onSelect)="setFamilia(familia.value)">
+            {{ familia.viewValue }}
+        </md-option>
+    </md-select>
+
+    <pagination-controls (pageChange)="p = $event" class="miPaginacion" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 </div>
-<pagination-controls (pageChange)="p = $event" class="miPaginacion" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
-<md-card class="example-card" *ngFor="let dato of datos | paginate: { itemsPerPage: 10, currentPage: p }">
-    <md-card-title>{{dato.NombreProducto}}</md-card-title>
-    <md-card-content>
-        <p>
-            <img src="{{dato.urlImagen[0]}}" alt="">
-        </p>
-    </md-card-content>
-    <md-card-actions>
-        <button md-button>LIKE</button>
-        <button md-button>SHARE</button>
-    </md-card-actions>
-</md-card>
+
+<div id="meds" class="flex-container">
+    <md-card class="example-card flex-item" *ngFor="let med of datos | paginate: { itemsPerPage: 8, currentPage: p }">
+        <img src="{{med.urlImagen[0]}}" alt="">
+        <md-card-content>
+            <p>
+                {{med.NombreProducto}}
+            </p>
+        </md-card-content>
+        <md-card-actions>
+            <h2>
+                {{ med.PrecioVenta | currency: 'MXN': true }}
+            </h2>
+        </md-card-actions>
+    </md-card>
+</div>

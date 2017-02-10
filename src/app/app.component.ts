@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { HttpGetService } from './http-get.service';
 import { EmitterService } from './emitter.service';
 
@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
 
     datos;
     familia: string;
+    status: boolean = false;
+    emmitStatus = new EventEmitter();
 
     familias = [
         {value: 'MEDICAMENTOS', viewValue: 'Medicamentos'},
@@ -19,11 +21,12 @@ export class AppComponent implements OnInit {
         {value: 'MATERIAL DE CURACION', viewValue: 'Material de curación'}
     ];
 
-    constructor(private httpGet: HttpGetService) {
-    }
+    constructor(private httpGet: HttpGetService) { }
 
     ngOnInit() {
         //this.datos = this.httpGet.getMeds();
+
+        this.status = true;
 
         this.familia = 'MEDICAMENTOS';
 
@@ -35,19 +38,25 @@ export class AppComponent implements OnInit {
 
         EmitterService.get('MEDICAMENTOS').subscribe((res) => {
             console.log(res);
+            this.changeStatus();
         });
 
         EmitterService.get('VITAMINAS Y SUPLEMENTOS').subscribe((res) => {
             console.log(res);
+            this.changeStatus();
         });
 
         EmitterService.get('HIGIENE Y PERFUMERIA').subscribe((res) => {
             console.log(res);
+            this.changeStatus();
         });
 
         EmitterService.get('MATERIAL DE CURACION').subscribe((res) => {
             console.log(res);
+            this.changeStatus();
         });
+
+        this.emmitStatus.subscribe((res) => console.log(res));
 
     }
 
@@ -56,6 +65,7 @@ export class AppComponent implements OnInit {
     }
 
     setFamilia(familia: string) {
+        this.changeStatus();
         this.familia = familia;
         this.getProducts();
     }
@@ -66,6 +76,11 @@ export class AppComponent implements OnInit {
                 this.getData( result );
             },
             error  => console.error( error ) );
+    }
+
+    private changeStatus() {
+        this.status = !this.status;
+        this.emmitStatus.emit(this.status);
     }
 
 }

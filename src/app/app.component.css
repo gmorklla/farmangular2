@@ -1,10 +1,31 @@
 .example-card {
-  margin: 0 auto;
-  margin-bottom: 10px;
+    margin: 0 auto;
+    margin-bottom: 10px;
 }
+
+md-card {
+    background-color: #f5f5f5;
+}
+
+md-card-actions {
+    padding-top: 0;
+}
+
 img {
-	width: 100%;
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
+
 md-select {
-	width: 100%;
+    width: 100%;
+}
+
+h2,
+p {
+    text-align: center;
+}
+.paginador {
+	max-width: 1196px;
+	margin: 0 auto;
 }

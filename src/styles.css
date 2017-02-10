@@ -5,6 +5,10 @@ html, body {
 	font-family: 'Roboto', sans-serif;
 }
 
+.miPaginacion .ng2-pagination {
+	text-align: center;
+}
+
 .miPaginacion .ng2-pagination .current {
     background: #00bcd4;
     border-radius: 10px;
