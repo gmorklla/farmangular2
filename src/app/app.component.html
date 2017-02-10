@@ -1,6 +1,12 @@
-<h1>
-  {{title}}
-</h1>
+<div>
+    <p>
+        <md-select placeholder="Familia">
+            <md-option *ngFor="let familia of familias" [value]="familia.value" (onSelect)="setFamilia(familia.value)">
+                {{ familia.viewValue }}
+            </md-option>
+        </md-select>
+    </p>
+</div>
 <pagination-controls (pageChange)="p = $event" class="miPaginacion" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
 <md-card class="example-card" *ngFor="let dato of datos | paginate: { itemsPerPage: 10, currentPage: p }">
     <md-card-title>{{dato.NombreProducto}}</md-card-title>
