@@ -75,7 +75,8 @@ export class AppComponent implements OnInit {
             result => {
                 this.getData( result );
             },
-            error  => console.error( error ) );
+            error  => console.error( error ),
+            () => { console.info("Hecho!")} );
     }
 
     private changeStatus() {
